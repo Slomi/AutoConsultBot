@@ -14,7 +14,7 @@ Python 3.11, aiogram 3, SQLite, GigaChat.
 ## Статус
 - [x] Код, офлайн-тесты логики с фейковой LLM
 - [x] Живой тест: @AutoConsult_tBot, GigaChat-2-Pro, eval 10/10 (`eval_questions.py`)
-- [x] Демо-видео: `~/Videos/autoconsult_demo.mp4` (Remotion, см. ниже)
+- [x] Демо-видео: `media/autoconsult_demo.mp4` (Remotion, см. ниже)
 - [x] GitHub: github.com/Slomi/AutoConsultBot (публичный)
 
 ## Демо-ролик (`video/`)

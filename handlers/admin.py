@@ -12,7 +12,7 @@ import consultant
 import db
 import keyboards as kb
 from consultant import WORD_RE
-from utils import kb_to_markdown, parse_kb_markdown
+from utils import fmt_db_time, kb_to_markdown, parse_kb_markdown
 
 router = Router()
 router.message.filter(F.from_user.id.in_(config.ADMIN_IDS))
@@ -89,7 +89,7 @@ async def stats(cb: CallbackQuery):
 async def unanswered(cb: CallbackQuery):
     qs = [q for q in await db.questions_since(30) if not q["answered"]][:15]
     text = ("❓ <b>Бот не смог ответить (30 дней)</b>\n\n"
-            + "\n".join(f"• {q['created_at'][5:16]} — {escape(q['text'][:150])}" for q in qs)
+            + "\n".join(f"• {fmt_db_time(q['created_at'])} — {escape(q['text'][:150])}" for q in qs)
             + "\n\nДобавьте ответы в базу знаний — и бот начнёт отвечать сам.") if qs else "Все вопросы отвечены 👍"
     await cb.message.edit_text(text, reply_markup=kb.back_kb())
     await cb.answer()
@@ -99,7 +99,7 @@ async def unanswered(cb: CallbackQuery):
 async def leads(cb: CallbackQuery):
     rows = await db.leads_last(10)
     text = ("📝 <b>Последние заявки</b>\n\n" + "\n\n".join(
-        f"#{r['id']} {r['created_at'][5:16]}\n{escape(r['name'] or '')}, {escape(r['phone'] or '')}\n"
+        f"#{r['id']} {fmt_db_time(r['created_at'])}\n{escape(r['name'] or '')}, {escape(r['phone'] or '')}\n"
         f"🚗 {escape(r['car'] or '')}\n🔧 {escape((r['problem'] or '(см. переписку)')[:200])}" for r in rows)
     ) if rows else "Заявок пока нет."
     await cb.message.edit_text(text, reply_markup=kb.back_kb())

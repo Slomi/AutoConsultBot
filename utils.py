@@ -15,6 +15,12 @@ def now() -> datetime:
     return datetime.now(TZ)
 
 
+def fmt_db_time(value: str) -> str:
+    """SQLite хранит datetime('now') в UTC — показываем в часовом поясе бизнеса."""
+    utc = datetime.fromisoformat(value).replace(tzinfo=ZoneInfo("UTC"))
+    return f"{utc.astimezone(TZ):%d.%m %H:%M}"
+
+
 def parse_kb_markdown(text: str) -> list[tuple[str, str]]:
     """«## Заголовок» + текст до следующего заголовка → разделы базы знаний."""
     sections, title, lines = [], None, []

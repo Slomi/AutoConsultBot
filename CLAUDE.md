@@ -15,4 +15,4 @@ Python 3.11, aiogram 3, SQLite, GigaChat.
 - [x] Код, офлайн-тесты логики с фейковой LLM
 - [ ] Бот в @BotFather, ключ GigaChat в `.env`, живой тест
 - [ ] Демо-видео
-- [ ] GitHub
+- [x] GitHub: github.com/Slomi/AutoConsultBot (приватный)
